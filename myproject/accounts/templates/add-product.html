@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Add Product
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="name">Product Name</label>
+    <input type="text" name="name">
+    <label for="name">Product Price</label>
+    <input type="text" name="price">
+    <button type="submit">Submit</button>
+</form>
+
+ 
+
+<a href="{% url 'logout' %}">Logout</a>
+{% endblock %}

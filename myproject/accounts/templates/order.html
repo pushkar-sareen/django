@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ Orders
+{% endblock %}
+
+{% block content %}
+    {% for order in orders %}
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+
+        {% for product in order.product.all %}
+            <p>
+                Product Name: {{ product.name }}<br>
+                Product Price: ${{ product.price }}
+            </p>
+        {% empty %}
+            <p>No products in this order.</p>
+        {% endfor %}
+
+        <hr>
+    {% endfor %}
+{% endblock %}

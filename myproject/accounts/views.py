@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login , logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Customer
+from .models import Customer, Product, Order
 
 # Create your views here.
 
@@ -37,3 +37,33 @@ def index(request):
 def logout_user(request):
     logout(request)
     return redirect("login")
+
+
+def add_product(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+
+        product = Product.objects.create(name=name, price=price)
+        product.save()
+        return redirect("/")
+    return render(request, "add-product.html") 
+
+def get_product(request):
+    products = Product.objects.all()
+    return render(request, "product.html", {'products':products})
+
+
+def add_order(request, product_id):
+    customer = Customer.objects.get(user= request.user)
+    product = Product.objects.get(id=product_id)
+    order = Order.objects.create(
+        customer = customer
+    )
+    order.product.add(product)
+    order.save()
+    return redirect("order")
+
+def get_order(request):
+    orders = Order.objects.filter(customer__user=request.user)
+    return render(request, "order.html", {"orders": orders})

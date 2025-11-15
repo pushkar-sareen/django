@@ -23,5 +23,10 @@ urlpatterns = [
     path('', index, name="homepage"),
     path('signup/', signup_user, name="signup"),
     path('login/', login_user, name="login"),
-    path('logout/', logout_user, name="logout")
+    path('logout/', logout_user, name="logout"),
+    path('add-product/', add_product, name="add-product"),
+    path('product/', get_product, name="product"),
+    path('order/<int:product_id>', add_order, name="add-order"),
+    path('order/', get_order, name="order"),
+
 ]

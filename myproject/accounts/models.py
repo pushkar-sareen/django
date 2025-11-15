@@ -9,3 +9,10 @@ class Customer(models.Model):
     Email = models.EmailField(unique=True) 
 
 
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    price =models.DecimalField(max_digits=10, decimal_places=2)
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    product = models.ManyToManyField(Product)
