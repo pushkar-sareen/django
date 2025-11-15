@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+Homepage
+{% if user %}
+<p>Welcome {{user}}</p>
+{% endif %}
+ 
+
+<a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
