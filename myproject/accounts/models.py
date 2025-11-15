@@ -8,3 +8,4 @@ class Customer(models.Model):
     Name = models.CharField(max_length=50)
     Email = models.EmailField(unique=True) 
 
+
